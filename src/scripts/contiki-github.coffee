@@ -11,7 +11,7 @@
 #   HUBOT_GITHUB_API
 #
 # Commands:
-#   hubot repo show <repo> - shows activity of repository
+#   hubot current release - shows activity of release branches
 #
 # Notes:
 #   HUBOT_GITHUB_API allows you to set a custom URL path (for Github enterprise users)
@@ -48,8 +48,7 @@ module.exports = (robot) ->
                   for c in commits
                     if last_commit.sha is c.sha
                       break
-                    d = new Date(Date.parse(c.commit.committer.date)).toFormat("DD/MM HH24:MI")
-                    msg.send "[#{d} -> #{c.commit.committer.name}] #{c.commit.message}"
+                    msg.send "--> #{c.commit.message} [#{c.commit.committer.name}]"
 
 #    msg.send "Getting Release branches..."
 #    github.branches "contikiholidays/contiki", (branches) ->
