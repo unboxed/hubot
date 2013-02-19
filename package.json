@@ -22,7 +22,9 @@
     "connect": "2.3.4",
     "connect_router": "1.8.6",
     "date-utils": ">=1.2.5",
-    "githubot": "0.2.0"
+    "githubot": "0.2.0",
+    "htmlparser": "1.7.6",
+   "soupselect": "0.2.0"
   },
 
   "engines": {
