@@ -22,7 +22,7 @@ motivate = [
   "To show our appreciation for so much power, we keep heaven packed with fresh souls! God was here before the Marine Corps! So you can give your heart to Jesus, but your ass belongs to the Corps!",
   "Today, you people are no longer maggots. Today, you are Marines. You're part of a brotherhood.",
   "Most of you will go to Vietnam. Some of you will not come back. But always remember this: Marines die. That's what we're here for. But the Marine Corps lives forever. And that means YOU live forever.",
-  "I am Gunnery Sergeant Hartman, your senior drill instructor. From now on you will speak only when spoken to, and the first and last words out of your filthy sewers will be "Sir". Do you maggots understand that?",
+  "I am Gunnery Sergeant Hartman, your senior drill instructor. From now on you will speak only when spoken to, and the first and last words out of your filthy sewers will be \"Sir\". Do you maggots understand that?",
   "Bullshit I can't hear you. Sound off like you got a pair! ",
   "If you ladies leave my island, if you survive recruit training, you will be a weapon. You will be a minister of death praying for war. But until that day you are pukes.",
   "You are the lowest form of life on Earth. You are not even human fucking beings. You are nothing but unorganized grabastic pieces of amphibian shit!",
@@ -94,5 +94,5 @@ module.exports = (robot) ->
   regex = new RegExp('(?:^|\\s)(' + words.join('|') + ')(?:\\s|\\.|\\?|!|$)', 'i');
 
   robot.hear regex, (msg) ->
-    msg.send msg.random rules
+    msg.send msg.random motivate
 
