@@ -106,7 +106,8 @@ module.exports = (robot) ->
 
     usern = ""
     if typeof user is 'object'
-      usern = " " + user.name
+      name_arr = user.name.split(" ")
+      usern = " " + name_arr[name_arr.length - 1]
 
     motivation = msg.random motivations
     msg.send motivation.replace /\[USER\]/g, usern
