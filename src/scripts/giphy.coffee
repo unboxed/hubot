@@ -19,3 +19,5 @@ giphyMe = (msg, query, cb) ->
       if images.length > 0
         image = msg.random images
         cb image.original_url
+      else
+        cb "I can't find a gif for \"#{query}\""
