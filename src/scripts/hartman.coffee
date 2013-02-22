@@ -13,7 +13,7 @@
 # Author:
 #   carlokruger
 
-general_motivations = [
+general = [
   "Are you quitting on me? Well, are you? Then quit, you slimy fucking walrus-looking piece of shit!",
   "Get the fuck off of my obstacle! Get the fuck down off of my obstacle! NOW! MOVE IT! Or I'm going to rip your balls off, so you cannot contaminate the rest of the world!",
   "Today... is Christmas! There will be a magic show at zero-nine-thirty!",
@@ -73,7 +73,7 @@ general_motivations = [
   "Reveille! Reveille! Reveille! Drop your Cocks and grab your socks! Today is Sunday! Divine worship is at 0800. Get your bunks made and get your uniforms on! Police call will commence in two minutes!",
 ]
 
-personal_motivations = [
+personal = [
   "Were you born a fat, slimy, scumbag puke piece o' shit, Private[USER], or did you have to work on it?",
   "Oh that's right, Private[USER], don't make any fucking effort to get to the top of the fucking obstacle. If God would have wanted you up there he would have miracled your ass up there by now, wouldn't he?",
   "Do you think I'm cute, Private[USER]? Do you think I'm funny?",
@@ -101,21 +101,20 @@ module.exports = (robot) ->
     else
       false
 
-  robot.respond /(.*)motivate (.*)/i, (msg) ->
-    personal_offence = msg.match[1] if msg.match[1] is "personally "
-    name = msg.match[2]
-    name = msg.message.user.name if name is "me"
+  findUserSurname = (name) ->
     user = findUser name
     username = ""
-
-    if personal_offence?
-      motivations = personal_motivations
-    else
-      motivations = personal_motivations.concat(general_motivations)
-
     if typeof user is 'object'
-      name_arr = user.name.split(" ")
+      name_arr = user.name.split " "
       username = " " + name_arr[name_arr.length - 1]
+    return username
+
+  robot.respond /(.*)motivate (.*)/i, (msg) ->
+    personal_offence = msg.match[1] if msg.match[1] is "personally "
+    name = msg.message.user.name if msg.match[2] is "me"
+    username = findUserSurname name
+
+    motivations = if personal_offence? then personal else personal.concat general
 
     motivation = msg.random motivations
     msg.send motivation.replace /\[USER\]/g, username
