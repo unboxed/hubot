@@ -1,26 +1,15 @@
-# Hubot
+# Tikibot
 
-This is a version of GitHub's Campfire bot, hubot. He's pretty cool.
+This the Unboxed Cape Town fork of GitHub's Campfire bot, [hubot][hubot].
 
-**You'll probably never have to hack on this repo directly.**
+## Installation
 
-Instead this repo provides a library that's distributed by `npm` that you
-simply require in your project. Follow the instructions below and get your own
-hubot ready to deploy.
+Make sure you have [node.js][nodejs], [npm][npmjs] (npm comes with node v0.6.3+) and [CoffeScript][coffescript] (`npm install -g coffee-script`) installed.
 
-## Getting your own
-
-Make sure you have [node.js][nodejs] and [npm][npmjs] (npm comes with node v0.6.3+) installed.
-
-Download the [latest version of hubot][hubot-latest].
-
-Then follow the instructions in the [README][readme] in the extracted `hubot`
-directory.
-
+[hubot]: http://hubot.github.com/
 [nodejs]: http://nodejs.org
 [npmjs]: http://npmjs.org
-[hubot-latest]: https://github.com/github/hubot/archive/master.zip
-[readme]: https://github.com/github/hubot/blob/master/src/templates/README.md
+[coffescript]: http://coffeescript.org/
 
 ## Adapters
 
@@ -128,9 +117,14 @@ module.exports = (robot) ->
 
 If you'll provide an event, it's very recommended to include a hubot user object in data. In case of other reacting scripts want to respond to chat.
 
-[event-emitter]: http://nodejs.org/api/events.html#events_class_events_eventemitter 
+[event-emitter]: http://nodejs.org/api/events.html#events_class_events_eventemitter
 
 ## Testing hubot locally
+
+Clone the repo and jump into the directory.
+
+    % git clone git@github.com:unboxed/hubot.git hubot
+    % cd hubot
 
 Install all of the required dependencies by running `npm install`.
 
@@ -143,3 +137,26 @@ It's easy to test scripts locally with an interactive shell:
 
     % make test
 
+## Deploying to Heroku
+
+First, [set up heroku](https://devcenter.heroku.com/articles/quickstart) with the `alphen@` account.
+
+Then prepare the package, and jump into the (hubot/hubot) directory.
+
+    % make package
+    % cd hubot
+
+Create a new git repo.
+
+    % git init
+    % git add .
+    % git commit -m "Commit message"
+
+Log in to heroku, and add the ubxd hubot repo as a remote
+
+    % heroku login
+    % git remote add heroku git@heroku.com:ubxd-hubot.git
+
+Push your changes for fun and profit.
+
+    % git push --force heroku
