@@ -111,6 +111,7 @@ module.exports = (robot) ->
 
   robot.respond /(.*)motivate (.*)/i, (msg) ->
     personal_offence = msg.match[1] if msg.match[1] is "personally "
+    name = msg.match[2]
     name = msg.message.user.name if msg.match[2] is "me"
     username = findUserSurname name
 
