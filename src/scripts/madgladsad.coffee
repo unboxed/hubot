@@ -110,7 +110,7 @@ module.exports = (robot) ->
         response += "##{glad.num} - #{glad.glad}\n"
       msg.send response
     else
-      msg.send "Nothing mad anyone glad yet."
+      msg.send "Nothing made anyone glad yet."
 
   robot.respond /(sadlist)/i, (msg) ->
     if madgladsad.sadlist().length > 0
