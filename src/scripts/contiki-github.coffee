@@ -43,5 +43,6 @@ module.exports = (robot) ->
                 msg.send "Achievement unlocked: [LIKE A BOSS] no commits found!"
               else
                 for c in commits
-                  unless c.sha in master_commits
-                    msg.send "--> #{c.commit.message}"
+                  if c.commit.message.indexOf("CW-") isnt -1 or c.commit.message.indexOf("cw-") isnt -1
+                    unless c.sha in master_commits
+                      msg.send "--> #{c.commit.message}"
