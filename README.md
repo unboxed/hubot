@@ -160,3 +160,7 @@ Log in to heroku, and add the ubxd hubot repo as a remote
 Push your changes for fun and profit.
 
     % git push --force heroku
+    
+### Restarting hubot
+
+    % heroku restart --app ubxd-hubot
