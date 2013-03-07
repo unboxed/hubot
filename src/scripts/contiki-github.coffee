@@ -23,26 +23,27 @@ require('date-utils')
 
 module.exports = (robot) ->
   github = require("githubot")(robot)
+  githubrepo = "contikiholidays/contiki"
+  githuburl = "https://api.github.com/repos/#{githubrepo}/commits?sha="
+
   robot.respond /(current release)|(cr)$/i, (msg) ->
     msg.send "Getting Release branches data..."
-    master_url = "https://api.github.com/repos/contikiholidays/contiki/commits?sha=master"
+    master_url = "#{githuburl}master"
     github.get master_url, (master_commits) ->
-      if master_commits.message
-        msg.send "Achievement unlocked: [NEEDLE IN A HAYSTACK] repository #{last_commits.message}!"
-      else if master_commits.length == 0
-        msg.send "Achievement unlocked: [LIKE A BOSS] no commits found!"
-      else
-        github.branches "contikiholidays/contiki", (branches) ->
-          for release_branch in branches when release_branch.name.indexOf("release-") isnt -1
-            msg.send release_branch.name
-            url = "https://api.github.com/repos/contikiholidays/contiki/commits?sha=#{release_branch.name}"
-            github.get url, (commits) ->
-              if commits.message
-                msg.send "Achievement unlocked: [NEEDLE IN A HAYSTACK] repository #{commits.message}!"
-              else if commits.length == 0
-                msg.send "Achievement unlocked: [LIKE A BOSS] no commits found!"
-              else
-                for c in commits
-                  if c.commit.message.indexOf("CW-") isnt -1 or c.commit.message.indexOf("cw-") isnt -1
-                    unless c.sha in master_commits
-                      msg.send "--> #{c.commit.message}"
+
+      github.branches githubrepo, (branches) ->
+        release_branches = (branch.name for branch in branches).filter (x) -> x.toLowerCase().indexOf("release-") isnt -1
+        msg.send "No release branches found." unless release_branches.length
+        msg.send "1 release branch found." if release_branches.length == 1
+        msg.send "#{release_branches.length} release branches found." if release_branches.length > 1
+
+        for release_branch in release_branches
+          do (release_branch) ->
+            github.get "#{githuburl}#{release_branch}", (commits) ->
+
+              messagestr = "Branch: #{release_branch} \n"
+              for c in commits
+                if c.commit.message.toLowerCase().indexOf("cw-") isnt -1
+                  unless c.sha in master_commits
+                    messagestr += "--> #{c.commit.message} \n"
+              msg.send messagestr
