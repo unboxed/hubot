@@ -141,25 +141,10 @@ It's easy to test scripts locally with an interactive shell:
 
 First, [set up heroku](https://devcenter.heroku.com/articles/quickstart) with the `alphen@` account.
 
-Then prepare the package, and jump into the (hubot/hubot) directory.
+Then run the deploy script from the Hubot console
 
-    % make package
-    % cd hubot
-
-Create a new git repo.
-
-    % git init
-    % git add .
-    % git commit -m "Commit message"
-
-Log in to heroku, and add the ubxd hubot repo as a remote
-
-    % heroku login
-    % git remote add heroku git@heroku.com:ubxd-hubot.git
-
-Push your changes for fun and profit.
-
-    % git push --force heroku
+    % bin/hubot
+    % deploy.sh
     
 ### Restarting hubot
 
