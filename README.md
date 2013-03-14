@@ -144,7 +144,7 @@ First, [set up heroku](https://devcenter.heroku.com/articles/quickstart) with th
 Then run the deploy script from the Hubot console
 
     % bin/hubot
-    % deploy.sh
+    % bin/deploy.sh
     
 ### Restarting hubot
 
