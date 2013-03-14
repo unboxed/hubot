@@ -8,14 +8,14 @@
 #   WEBCAMS_API_TOKEN
 #
 # Commands:
-#   hubot webcam of (query) - Returns the results of a query to http://api.webcams.travel/
+#   hubot webcam (of|me) (query) - Returns the results of a query to http://api.webcams.travel/
 #
 # Author:
 #   richarcher
 
 
 module.exports = (robot) ->
-  robot.respond /(webcam)( of)? (.*)/i, (msg) ->
+  robot.respond /(webcam)( of| me)? (.*)/i, (msg) ->
     webcamOf msg, msg.match[3], (url) ->
       msg.send url
 
